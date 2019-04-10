@@ -1,9 +1,14 @@
 from setuptools import setup
 
+with open("README.rst") as f:
+    long_description = f.read()
+
 setup(
     name="pytest-slack",
-    version='1.0.0',
+    version='1.0.1',
     license='MIT',
+    long_description=long_description,
+    url="https://github.com/ArseniyAntonov/pytest-slack",
     description='pytest plugin for reporting to slack',
     author='Arseniy Antonov',
     author_email='arseniy.antonov@gmail.com',
