@@ -1,26 +1,58 @@
-from setuptools import setup
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
 
-with open("README.rst") as f:
-    long_description = f.read()
+"""The setup script."""
+
+from setuptools import setup, find_packages
+
+with open('README.rst') as readme_file:
+    readme = readme_file.read()
+
+with open('HISTORY.rst') as history_file:
+    history = history_file.read()
+
+requirements = ['requests']
+
+setup_requirements = ['pytest-runner', ]
+
+test_requirements = ['pytest', ]
 
 setup(
-    name="pytest-slack",
-    version='1.0.1',
-    license='MIT',
-    long_description=long_description,
-    url="https://github.com/ArseniyAntonov/pytest-slack",
-    description='pytest plugin for reporting to slack',
-    author='Arseniy Antonov',
-    author_email='arseniy.antonov@gmail.com',
-    packages=["pytest_slack"],
-    # the following makes a plugin available to pytest
-    entry_points={"pytest11": ["name_of_plugin = pytest_slack.plugin"]},
-    # custom PyPI classifier for pytest plugins
-    classifiers=["Framework :: Pytest"],
+    author="Arseniy Antonov",
+    author_email='arseny.antonov@gmail.com',
+    classifiers=[
+        'Framework :: Pytest',
+        'Development Status :: 2 - Pre-Alpha',
+        'Intended Audience :: Developers',
+        'License :: OSI Approved :: MIT License',
+        'Natural Language :: English',
+        "Programming Language :: Python :: 2",
+        'Programming Language :: Python :: 2.7',
+        'Programming Language :: Python :: 3',
+        'Programming Language :: Python :: 3.4',
+        'Programming Language :: Python :: 3.5',
+        'Programming Language :: Python :: 3.6',
+        'Programming Language :: Python :: 3.7',
+    ],
+    description="Pytest to Slack reporting plugin",
+    install_requires=requirements,
+    license="MIT license",
+    long_description=readme + '\n\n' + history,
+    include_package_data=True,
     keywords=[
         'pytest', 'py.test', 'slack',
     ],
-    install_requires=[
-        'requests'
-    ]
+    name='pytest-slack',
+    packages=find_packages(include=['pytest_slack']),
+    setup_requires=setup_requirements,
+    test_suite='tests',
+    tests_require=test_requirements,
+    url='https://github.com/ArseniyAntonov/pytest-slack',
+    version='1.0.1',
+    zip_safe=False,
+    entry_points={
+        'pytest11': [
+            'pytest-slack = pytest_slack.plugin',
+        ]
+    }
 )

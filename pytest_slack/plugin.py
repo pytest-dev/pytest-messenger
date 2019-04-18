@@ -37,6 +37,14 @@ def pytest_addoption(parser):
         help='Set the reporter name'
     )
 
+    group.addoption(
+        '--slack_timeout',
+        action='store',
+        dest='slack_timeout',
+        default=10,
+        help='Set the report send timeout'
+    )
+
 
 @pytest.hookimpl(hookwrapper=True)
 def pytest_terminal_summary(terminalreporter, exitstatus, config):
@@ -44,7 +52,7 @@ def pytest_terminal_summary(terminalreporter, exitstatus, config):
 
     if not config.option.slack_hook or not config.option.slack_channel:
         return
-
+    timeout = config.option.slack_timeout
     failed = len(terminalreporter.stats.get('failed', []))
     passed = len(terminalreporter.stats.get('passed', []))
     skipped = len(terminalreporter.stats.get('skipped', []))
@@ -81,4 +89,4 @@ def pytest_terminal_summary(terminalreporter, exitstatus, config):
                "attachments": [results_pattern],
                "icon_emoji": emoji}
 
-    requests.post(slack_hook, data=json.dumps(payload))
+    requests.post(slack_hook, data=json.dumps(payload), timeout=timeout)
