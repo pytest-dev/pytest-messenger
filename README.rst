@@ -2,7 +2,28 @@
 pytest-slack
 =================
 
-Pytest plugin for easy reporting to slack
+.. image:: https://img.shields.io/pypi/v/pytest-slack.svg
+        :target: https://pypi.python.org/pypi/pytest-slack
+
+.. image:: https://img.shields.io/travis/ArseniyAntonov/pytest-slack.svg
+        :target: https://travis-ci.org/ArseniyAntonov/pytest-slack
+
+.. image:: https://readthedocs.org/projects/pytest-slack/badge/?version=latest
+        :target: https://pytest-slack.readthedocs.io/en/latest/?badge=latest
+        :alt: Documentation Status
+
+
+.. image:: https://pyup.io/repos/github/ArseniyAntonov/pytest-slack/shield.svg
+     :target: https://pyup.io/repos/github/ArseniyAntonov/pytest-slack/
+     :alt: Updates
+
+
+
+Pytest to Slack reporting plugin
+
+
+* Free software: MIT license
+* Documentation: https://pytest-slack.readthedocs.io.
 
 
 Requirements
@@ -36,6 +57,8 @@ Usage
                         Set the report link
   --slack_username=SLACK_USERNAME
                         Set the reporter name
+  --slack_timeout=SLACK_TIMEOUT [DEFAULT = 10s ]
+                        Set the timeout for sending results in seconds
 
 
 Example
