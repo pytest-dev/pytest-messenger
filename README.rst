@@ -8,15 +8,17 @@ pytest-slack
 .. image:: https://img.shields.io/travis/ArseniyAntonov/pytest-slack.svg
         :target: https://travis-ci.org/ArseniyAntonov/pytest-slack
 
+.. image:: https://codecov.io/gh/ArseniyAntonov/pytest-slack/branch/master/graph/badge.svg
+        :target: https://codecov.io/gh/ArseniyAntonov/pytest-slack        
+
 .. image:: https://readthedocs.org/projects/pytest-slack/badge/?version=latest
         :target: https://pytest-slack.readthedocs.io/en/latest/?badge=latest
         :alt: Documentation Status
 
-
 .. image:: https://pyup.io/repos/github/ArseniyAntonov/pytest-slack/shield.svg
-     :target: https://pyup.io/repos/github/ArseniyAntonov/pytest-slack/
-     :alt: Updates
-
+        :target: https://pyup.io/repos/github/ArseniyAntonov/pytest-slack/
+        :alt: Updates
+     
 
 
 Pytest to Slack reporting plugin
