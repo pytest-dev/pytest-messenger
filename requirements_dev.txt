@@ -9,4 +9,4 @@ Sphinx==1.8.1
 twine==1.12.1
 mock=2.0.0
 pytest==4.4.1
-pytest-runner==4.2
+pytest-runner==4.4
