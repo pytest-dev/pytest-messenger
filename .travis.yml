@@ -6,8 +6,19 @@ python:
   - 3.5
   - 3.4
   - 2.7
-install: pip install -U tox-travis
-script: tox
+
+install: 
+  - pip install -U tox-travis
+  - pip install codecov
+
+script: 
+  - tox
+  - coverage run --source ./pytest_slack -m py.test tests
+  - coverage report -m
+
+after_success:
+  - codecov
+
 deploy:
   provider: pypi
   distributions: sdist bdist_wheel
