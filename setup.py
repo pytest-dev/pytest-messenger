@@ -47,7 +47,7 @@ setup(
     setup_requires=setup_requirements,
     test_suite='tests',
     tests_require=test_requirements,
-    url='https://github.com/ArseniyAntonov/pytest-slack',
+    url='https://github.com/pytest-dev/pytest-slack',
     version='1.0.2',
     zip_safe=False,
     entry_points={
