@@ -45,6 +45,22 @@ def pytest_addoption(parser):
         help='Set the report send timeout'
     )
 
+    group.addoption(
+        '--slack_success_icon',
+        action='store',
+        dest='slack_success_icon',
+        default=':thumbsup:',
+        help='Set icon for a successful run'
+    )
+
+    group.addoption(
+        '--slack_failed_icon',
+        action='store',
+        dest='slack_failed_icon',
+        default=':thumbsdown:',
+        help='Set icon for a failed run'
+    )
+
 
 @pytest.hookimpl(hookwrapper=True)
 def pytest_terminal_summary(terminalreporter, exitstatus, config):
@@ -66,10 +82,10 @@ def pytest_terminal_summary(terminalreporter, exitstatus, config):
 
     if int(exitstatus) == 0:
         color = "#56a64f"
-        emoji = ':thumbsup:'
+        emoji = config.option.slack_success_icon
     else:
         color = '#ff0000'
-        emoji = ':thumbsdown:'
+        emoji = config.option.slack_failed_icon
 
     final_results = 'Passed=%s Failed=%s Skipped=%s Error=%s' % (passed, failed, skipped, error)
     if report_link:
