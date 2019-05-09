@@ -46,19 +46,35 @@ def pytest_addoption(parser):
     )
 
     group.addoption(
+        '--slack_success_emoji',
+        action='store',
+        dest='slack_success_emoji',
+        default=':thumbsup:',
+        help='Set emoji for a successful run'
+    )
+
+    group.addoption(
+        '--slack_failed_emoji',
+        action='store',
+        dest='slack_failed_emoji',
+        default=':thumbsdown:',
+        help='Set emoji for a failed run'
+    )
+
+    group.addoption(
         '--slack_success_icon',
         action='store',
         dest='slack_success_icon',
-        default=':thumbsup:',
-        help='Set icon for a successful run'
+        default=None,
+        help='Set icon (a url) for a successful run. Overrides slack_success_emoji'
     )
 
     group.addoption(
         '--slack_failed_icon',
         action='store',
         dest='slack_failed_icon',
-        default=':thumbsdown:',
-        help='Set icon for a failed run'
+        default=None,
+        help='Set icon (a url) for a failed run. Overrides slack_failed_icon'
     )
 
 
@@ -82,10 +98,12 @@ def pytest_terminal_summary(terminalreporter, exitstatus, config):
 
     if int(exitstatus) == 0:
         color = "#56a64f"
-        emoji = config.option.slack_success_icon
+        emoji = config.option.slack_success_emoji
+        icon = config.option.slack_success_icon
     else:
         color = '#ff0000'
-        emoji = config.option.slack_failed_icon
+        emoji = config.option.slack_failed_emoji
+        icon = config.option.slack_failed_icon
 
     final_results = 'Passed=%s Failed=%s Skipped=%s Error=%s' % (passed, failed, skipped, error)
     if report_link:
@@ -103,6 +121,7 @@ def pytest_terminal_summary(terminalreporter, exitstatus, config):
     payload = {"channel": channel,
                "username": slack_username,
                "attachments": [results_pattern],
-               "icon_emoji": emoji}
+               "icon_emoji": emoji if icon is None else None,
+               "icon_url": icon}
 
     requests.post(slack_hook, data=json.dumps(payload), timeout=timeout)

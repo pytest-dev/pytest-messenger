@@ -61,10 +61,14 @@ Usage
                         Set the reporter name
   --slack_timeout=SLACK_TIMEOUT [DEFAULT = 10s ]
                         Set the timeout for sending results in seconds
-  --slack_success_icon=SLACK_SUCCESS_ICON [default = :thumbsup:]
-                        Set icon for a successful run
-  --slack_failed_icon=SLACK_FAILED_ICON [default = :thumbsdown:]
-                        Set icon for a failed run
+  --slack_success_emoji=SLACK_SUCCESS_EMOJI [default = :thumbsup:]
+                        Set emoji for a successful run
+  --slack_failed_emoji=SLACK_FAILED_EMOJI [default = :thumbsdown:]
+                        Set emoji for a failed run
+  --slack_success_icon=SLACK_SUCCESS_ICON [default = None]
+                        Set icon (a url) for a successful run. Overrides SLACK_SUCCESS_EMOJI
+  --slack_failed_icon=SLACK_FAILED_ICON [default = None]
+                        Set icon (a url) for a failed run. Overrides SLACK_FAILED_EMOJI
 
 
 Example
