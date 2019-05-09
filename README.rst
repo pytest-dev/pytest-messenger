@@ -31,9 +31,8 @@ Pytest to Slack reporting plugin
 Requirements
 ------------
 
-* Python3 version [3.5+]
 * Requests
-* Make sure you have the latest version of pytest_ installed for your environment
+
 
 
 Installation
