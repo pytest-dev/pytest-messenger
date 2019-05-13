@@ -39,7 +39,7 @@ def test_pytest_slack_failed(testdir):
                           '--slack_hook', slack_hook_host,
                           '--slack_report_link', slack_hook_report_host,
                           '--slack_username', slack_hook_username,
-                          '--slack_failed_icon', slack_hook_icon_emoji)
+                          '--slack_failed_emoji', slack_hook_icon_emoji)
 
         called_data = json.loads(mock_post.call_args[1]['data'])
         called_host = mock_post.call_args[0][0]
@@ -80,7 +80,7 @@ def test_pytest_slack_passed(testdir):
                           '--slack_hook', slack_hook_host,
                           '--slack_report_link', slack_hook_report_host,
                           '--slack_username', slack_hook_username,
-                          '--slack_success_icon', slack_hook_icon_emoji)
+                          '--slack_success_emoji', slack_hook_icon_emoji)
 
         called_data = json.loads(mock_post.call_args[1]['data'])
         called_host = mock_post.call_args[0][0]
@@ -102,7 +102,7 @@ def test_pytest_slack_passed(testdir):
     ('1 == 1', ':sunny:'),
     ('2 == 1', ':rain_cloud:'),
 ])
-def test_pytest_slack_custom_icons(testdir, test_input, expected_emoji):
+def test_pytest_slack_custom_emojis(testdir, test_input, expected_emoji):
     testdir.makepyfile(
         """
         def test_icon_emoji():
@@ -117,10 +117,70 @@ def test_pytest_slack_custom_icons(testdir, test_input, expected_emoji):
     with mock.patch('requests.post') as mock_post:
         testdir.runpytest('--slack_channel', slack_hook_channel,
                           '--slack_hook', slack_hook_host,
-                          '--slack_success_icon', slack_hook_icon_emoji_success,
-                          '--slack_failed_icon', slack_hook_icon_emoji_failed)
+                          '--slack_success_emoji', slack_hook_icon_emoji_success,
+                          '--slack_failed_emoji', slack_hook_icon_emoji_failed)
 
         called_data = json.loads(mock_post.call_args[1]['data'])
         emoji = called_data['icon_emoji']
 
         assert emoji == expected_emoji
+
+
+@pytest.mark.parametrize('test_input,expected_url', [
+    ('1 == 1', 'http://localhost/success.png'),
+    ('2 == 1', 'http://localhost/failed.png'),
+])
+def test_pytest_slack_custom_icons(testdir, test_input, expected_url):
+    testdir.makepyfile(
+        """
+        def test_icon_url():
+            assert %s
+        """ % test_input
+    )
+
+    slack_hook_host = 'http://test.com/any_hash'
+    slack_hook_channel = 'test'
+    slack_hook_icon_url_success = 'http://localhost/success.png'
+    slack_hook_icon_url_failed = 'http://localhost/failed.png'
+    with mock.patch('requests.post') as mock_post:
+        testdir.runpytest('--slack_channel', slack_hook_channel,
+                          '--slack_hook', slack_hook_host,
+                          '--slack_success_icon', slack_hook_icon_url_success,
+                          '--slack_failed_icon', slack_hook_icon_url_failed)
+
+        called_data = json.loads(mock_post.call_args[1]['data'])
+        emoji = called_data['icon_url']
+
+        assert emoji == expected_url
+
+
+@pytest.mark.parametrize('test_input,expected_url', [
+    ('1 == 1', 'http://localhost/success.png'),
+    ('2 == 1', 'http://localhost/failed.png'),
+])
+def test_pytest_slack_icon_overrides_emoji(testdir, test_input, expected_url):
+    testdir.makepyfile(
+        """
+        def test_icon_url():
+            assert %s
+        """ % test_input
+    )
+
+    slack_hook_host = 'http://test.com/any_hash'
+    slack_hook_channel = 'test'
+    slack_hook_icon_url_success = 'http://localhost/success.png'
+    slack_hook_icon_url_failed = 'http://localhost/failed.png'
+    slack_hook_icon_emoji_success = ':sunny:'
+    slack_hook_icon_emoji_failed = ':rain_cloud:'
+    with mock.patch('requests.post') as mock_post:
+        testdir.runpytest('--slack_channel', slack_hook_channel,
+                          '--slack_hook', slack_hook_host,
+                          '--slack_success_icon', slack_hook_icon_url_success,
+                          '--slack_failed_icon', slack_hook_icon_url_failed,
+                          '--slack_success_emoji', slack_hook_icon_emoji_success,
+                          '--slack_failed_emoji', slack_hook_icon_emoji_failed)
+
+        called_data = json.loads(mock_post.call_args[1]['data'])
+        emoji = called_data['icon_url']
+
+        assert emoji == expected_url
