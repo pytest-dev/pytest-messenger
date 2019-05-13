@@ -181,6 +181,8 @@ def test_pytest_slack_icon_overrides_emoji(testdir, test_input, expected_url):
                           '--slack_failed_emoji', slack_hook_icon_emoji_failed)
 
         called_data = json.loads(mock_post.call_args[1]['data'])
-        emoji = called_data['icon_url']
+        url = called_data['icon_url']
+        emoji = called_data['icon_emoji']
 
-        assert emoji == expected_url
+        assert url == expected_url
+        assert emoji == None
