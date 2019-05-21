@@ -46,7 +46,7 @@ You can install "pytest-slack" via `pip`_::
 Usage
 -----
 * Setup `slack hook`_
-* Use this plugin by running pytest normally and use the follwoing options to customize report:
+* Use this plugin by running pytest normally and use the following options to customize report:
 
 
 >>> slack:
