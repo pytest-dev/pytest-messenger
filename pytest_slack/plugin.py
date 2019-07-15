@@ -89,6 +89,8 @@ def pytest_terminal_summary(terminalreporter, exitstatus, config):
     passed = len(terminalreporter.stats.get('passed', []))
     skipped = len(terminalreporter.stats.get('skipped', []))
     error = len(terminalreporter.stats.get('error', []))
+    xfailed = len(terminalreporter.stats.get("xfailed", []))
+    xpassed = len(terminalreporter.stats.get("xpassed", []))
 
     report_link = config.option.slack_report_link
     slack_hook = config.option.slack_hook
@@ -105,7 +107,7 @@ def pytest_terminal_summary(terminalreporter, exitstatus, config):
         emoji = config.option.slack_failed_emoji
         icon = config.option.slack_failed_icon
 
-    final_results = 'Passed=%s Failed=%s Skipped=%s Error=%s' % (passed, failed, skipped, error)
+    final_results = 'Passed=%s Failed=%s Skipped=%s Error=%s XFailed=%s XPassed=%s' % (passed, failed, skipped, error, xfailed, xpassed)
     if report_link:
         final_results = '<%s|%s>' % (report_link, final_results)
 

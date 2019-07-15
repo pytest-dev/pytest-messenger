@@ -25,6 +25,15 @@ def test_pytest_slack_failed(testdir):
 
         def test_error(test):
             assert 1 == ""
+
+
+        @pytest.mark.xfail()
+        def test_xfail():
+            assert 1 == 2
+
+        @pytest.mark.xfail()
+        def test_xpass():
+            assert 1 == 1
         """
     )
 
@@ -33,7 +42,7 @@ def test_pytest_slack_failed(testdir):
     slack_hook_report_host = 'http://report_link.com'
     slack_hook_channel = 'test'
     slack_hook_icon_emoji = ':thumbsdown:'
-    expected_text = '<http://report_link.com|Passed=1 Failed=1 Skipped=1 Error=1>'
+    expected_text = '<http://report_link.com|Passed=1 Failed=1 Skipped=1 Error=1 XFailed=1 XPassed=1>'
     with mock.patch('requests.post') as mock_post:
         testdir.runpytest('--slack_channel', slack_hook_channel,
                           '--slack_hook', slack_hook_host,
@@ -74,7 +83,7 @@ def test_pytest_slack_passed(testdir):
     slack_hook_report_host = 'http://report_link.com'
     slack_hook_channel = 'test'
     slack_hook_icon_emoji = ':thumbsup:'
-    expected_text = '<http://report_link.com|Passed=1 Failed=0 Skipped=0 Error=0>'
+    expected_text = '<http://report_link.com|Passed=1 Failed=0 Skipped=0 Error=0 XFailed=0 XPassed=0>'
     with mock.patch('requests.post') as mock_post:
         testdir.runpytest('--slack_channel', slack_hook_channel,
                           '--slack_hook', slack_hook_host,
