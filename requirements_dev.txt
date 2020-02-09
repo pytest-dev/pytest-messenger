@@ -1,13 +1,12 @@
 pip==20.0.2
 bumpversion==0.5.3
-wheel==0.34.1
-watchdog==0.10.0
+wheel==0.34.2
+watchdog==0.10.2
 flake8==3.7.9
 tox==3.14.3
 coverage==5.0.3
-Sphinx==2.3.0
+Sphinx==2.4.0
 twine==3.1.1
-mock==3.0.5
 pytest==5.3.5
+mock==4.0.1
 pytest-runner==5.2
-
