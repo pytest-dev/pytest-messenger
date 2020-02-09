@@ -1,2 +1,2 @@
 pytest
-mock
+mock==4.0.1
