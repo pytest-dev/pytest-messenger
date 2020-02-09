@@ -5,9 +5,12 @@ Credits
 Development Lead
 ----------------
 
-* Arseniy Antonov <arseny.antonov@gmail.com>
+* `Arseniy Antonov <https://github.com/ArseniyAntonov>`_, arseny.antonov@gmail.com
 
 Contributors
 ------------
 
-None yet. Why not be the first?
+* `repsejnworb <https://github.com/repsejnworb>`_
+* `lithammer <https://github.com/lithammer>`_
+* `mstevens <https://github.com/mstevens>`_
+* `AWegnerGitHub <https://github.com/AWegnerGitHub>`_
