@@ -1,2 +1,2 @@
 mock
-requests
+requests==2.23.0
