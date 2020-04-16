@@ -194,4 +194,4 @@ def test_pytest_slack_icon_overrides_emoji(testdir, test_input, expected_url):
         emoji = called_data['icon_emoji']
 
         assert url == expected_url
-        assert emoji == None
+        assert emoji is None

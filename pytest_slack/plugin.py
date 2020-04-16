@@ -107,7 +107,8 @@ def pytest_terminal_summary(terminalreporter, exitstatus, config):
         emoji = config.option.slack_failed_emoji
         icon = config.option.slack_failed_icon
 
-    final_results = 'Passed=%s Failed=%s Skipped=%s Error=%s XFailed=%s XPassed=%s' % (passed, failed, skipped, error, xfailed, xpassed)
+    final_results = 'Passed=%s Failed=%s Skipped=%s Error=%s XFailed=%s XPassed=%s' % (
+        passed, failed, skipped, error, xfailed, xpassed)
     if report_link:
         final_results = '<%s|%s>' % (report_link, final_results)
 
