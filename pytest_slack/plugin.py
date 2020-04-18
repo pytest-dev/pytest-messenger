@@ -82,7 +82,7 @@ def pytest_addoption(parser):
 def pytest_terminal_summary(terminalreporter, exitstatus, config):
     yield
 
-    if not config.option.slack_hook or not config.option.slack_channel:
+    if not config.option.slack_hook:
         return
     timeout = config.option.slack_timeout
     failed = len(terminalreporter.stats.get('failed', []))
