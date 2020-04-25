@@ -100,6 +100,12 @@ Issues
 
 If you encounter any problems, please `file an issue`_ along with a detailed description.
 
+
+Credits
+-------
+
+[ ~ Dependencies scanned by PyUp.io ~ ]
+
 .. _`slack hook`: https://get.slack.help/hc/en-us/articles/115005265063-Incoming-WebHooks-for-Slack
 .. _`file an issue`: https://github.com/pytest-dev/pytest-slack/issues
 .. _`pytest`: https://github.com/pytest-dev/pytest
