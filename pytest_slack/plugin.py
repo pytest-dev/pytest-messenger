@@ -7,11 +7,11 @@ import requests
 def pytest_addoption(parser):
     group = parser.getgroup('slack')
     group.addoption(
-        '--disable_ssl_verify',
+        '--ssl_verify',
         action='store',
-        dest='disable_ssl_verify',
-        default=False,
-        help='Disable SSL verification when using self signed certificate'
+        dest='ssl_verify',
+        default=True,
+        help='Set the TLS certificate verification'
     )
     group.addoption(
         '--slack_channel',
@@ -102,7 +102,7 @@ def pytest_terminal_summary(terminalreporter, exitstatus, config):
     report_link = config.option.slack_report_link
     slack_hook = config.option.slack_hook
     channel = config.option.slack_channel
-    disable_ssl_verify = config.option.disable_ssl_verify
+    ssl_verify = config.option.ssl_verify
     
     slack_username = config.option.slack_username if config.option.slack_username else 'Regression testing results'
 
@@ -134,7 +134,5 @@ def pytest_terminal_summary(terminalreporter, exitstatus, config):
                "attachments": [results_pattern],
                "icon_emoji": emoji if icon is None else None,
                "icon_url": icon}
-    if disable_ssl_verify is False:
-        requests.post(slack_hook, data=json.dumps(payload), timeout=timeout)
-    else: 
-        requests.post(slack_hook, data=json.dumps(payload), timeout=timeout, verify=False)
+
+    requests.post(slack_hook, data=json.dumps(payload), timeout=timeout, verify=ssl_verify)
