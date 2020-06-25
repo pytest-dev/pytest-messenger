@@ -91,6 +91,9 @@ def pytest_terminal_summary(terminalreporter, exitstatus, config):
 
     if not config.option.slack_hook:
         return
+    # special check for pytest-xdist plugin, cause we do not want to send report for each worker.
+    if hasattr(terminalreporter.config, 'workerinput'):
+        return
     timeout = config.option.slack_timeout
     failed = len(terminalreporter.stats.get('failed', []))
     passed = len(terminalreporter.stats.get('passed', []))
@@ -103,7 +106,7 @@ def pytest_terminal_summary(terminalreporter, exitstatus, config):
     slack_hook = config.option.slack_hook
     channel = config.option.slack_channel
     ssl_verify = config.option.ssl_verify
-    
+
     slack_username = config.option.slack_username if config.option.slack_username else 'Regression testing results'
 
     if int(exitstatus) == 0:
