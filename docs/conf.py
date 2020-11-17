@@ -48,8 +48,8 @@ master_doc = 'index'
 
 # General information about the project.
 project = u'Pytest Slack'
-copyright = u"2019, Arseniy Antonov"
-author = u"Arseniy Antonov"
+copyright = u"2019, LaserPhaser"
+author = u"LaserPhaser"
 
 # The version info for the project you're documenting, acts as replacement
 # for |version| and |release|, also used in various other places throughout
@@ -130,7 +130,7 @@ latex_elements = {
 latex_documents = [
     (master_doc, 'pytest_slack.tex',
      u'Pytest Slack Documentation',
-     u'Arseniy Antonov', 'manual'),
+     u'LaserPhaser', 'manual'),
 ]
 
 

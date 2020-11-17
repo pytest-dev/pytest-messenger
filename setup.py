@@ -21,7 +21,7 @@ setup_requirements = ['pytest-runner', ]
 test_requirements = ['pytest', ]
 
 setup(
-    author="Arseniy Antonov",
+    author="LaserPhaser",
     author_email='arseny.antonov@gmail.com',
     classifiers=[
         'Framework :: Pytest',
@@ -48,7 +48,7 @@ setup(
     test_suite='tests',
     tests_require=test_requirements,
     url='https://github.com/pytest-dev/pytest-slack',
-    version='2.2.4',
+    version='2.3.0',
     zip_safe=False,
     entry_points={
         'pytest11': [

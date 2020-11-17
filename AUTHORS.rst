@@ -5,7 +5,7 @@ Credits
 Development Lead
 ----------------
 
-* `Arseniy Antonov <https://github.com/ArseniyAntonov>`_, arseny.antonov@gmail.com
+* `Laser <https://github.com/LaserPhaser>`_, arseny.antonov@gmail.com
 
 Contributors
 ------------
