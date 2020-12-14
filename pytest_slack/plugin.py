@@ -45,6 +45,14 @@ def pytest_addoption(parser):
     )
 
     group.addoption(
+        '--slack_message_prefix',
+        action='store',
+        dest='slack_message_prefix',
+        default=None,
+        help='Set a prefix to come before the test result counts.'
+    )
+
+    group.addoption(
         '--slack_timeout',
         action='store',
         dest='slack_timeout',
@@ -106,6 +114,7 @@ def pytest_terminal_summary(terminalreporter, exitstatus, config):
     slack_hook = config.option.slack_hook
     channel = config.option.slack_channel
     ssl_verify = config.option.ssl_verify
+    message_prefix = config.option.slack_message_prefix
 
     slack_username = config.option.slack_username if config.option.slack_username else 'Regression testing results'
 
@@ -122,6 +131,8 @@ def pytest_terminal_summary(terminalreporter, exitstatus, config):
         passed, failed, skipped, error, xfailed, xpassed)
     if report_link:
         final_results = '<%s|%s>' % (report_link, final_results)
+    if message_prefix:
+        final_results = '%s: %s' % (message_prefix, final_results)
 
     results_pattern = {
         "color": color,
