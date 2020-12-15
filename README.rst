@@ -2,7 +2,7 @@
 pytest-messenger
 =================
 
-ex pytest-messenger
+ex pytest-slack
 
 .. image:: https://img.shields.io/pypi/v/pytest-messenger.svg
         :target: https://pypi.python.org/pypi/pytest-messenger
