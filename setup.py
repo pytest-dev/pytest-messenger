@@ -42,17 +42,17 @@ setup(
     keywords=[
         'pytest', 'py.test', 'slack',
     ],
-    name='pytest-slack',
-    packages=find_packages(include=['pytest_slack']),
+    name='pytest-messenger',
+    packages=find_packages(include=['pytest_messenger']),
     setup_requires=setup_requirements,
     test_suite='tests',
     tests_require=test_requirements,
-    url='https://github.com/pytest-dev/pytest-slack',
+    url='https://github.com/pytest-dev/pytest-messenger',
     version='2.3.1',
     zip_safe=False,
     entry_points={
         'pytest11': [
-            'pytest-slack = pytest_slack.plugin',
+            'pytest-messenger = pytest_messenger.plugin',
         ]
     }
 )

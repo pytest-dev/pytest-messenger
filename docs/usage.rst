@@ -2,6 +2,6 @@
 Usage
 =====
 
-To use Pytest Slack in a project::
+To use Pytest Messenger in a project::
 
-    import pytest_slack
+    import pytest_messenger

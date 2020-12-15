@@ -1,31 +1,33 @@
 =================
-pytest-slack
+pytest-messenger
 =================
 
-.. image:: https://img.shields.io/pypi/v/pytest-slack.svg
-        :target: https://pypi.python.org/pypi/pytest-slack
+ex pytest-messenger
 
-.. image:: https://img.shields.io/travis/pytest-dev/pytest-slack.svg
-        :target: https://travis-ci.org/pytest-dev/pytest-slack
+.. image:: https://img.shields.io/pypi/v/pytest-messenger.svg
+        :target: https://pypi.python.org/pypi/pytest-messenger
 
-.. image:: https://codecov.io/gh/pytest-dev/pytest-slack/branch/master/graph/badge.svg
-        :target: https://codecov.io/gh/pytest-dev/pytest-slack
+.. image:: https://img.shields.io/travis/pytest-dev/pytest-messenger.svg
+        :target: https://travis-ci.org/pytest-dev/pytest-messenger
 
-.. image:: https://readthedocs.org/projects/pytest-slack/badge/?version=latest
-        :target: https://pytest-slack.readthedocs.io/en/latest/?badge=latest
+.. image:: https://codecov.io/gh/pytest-dev/pytest-messenger/branch/master/graph/badge.svg
+        :target: https://codecov.io/gh/pytest-dev/pytest-messenger
+
+.. image:: https://readthedocs.org/projects/pytest-messenger/badge/?version=latest
+        :target: https://pytest-messenger.readthedocs.io/en/latest/?badge=latest
         :alt: Documentation Status
 
-.. image:: https://pyup.io/repos/github/pytest-dev/pytest-slack/shield.svg
-        :target: https://pyup.io/repos/github/pytest-dev/pytest-slack/
+.. image:: https://pyup.io/repos/github/pytest-dev/pytest-messenger/shield.svg
+        :target: https://pyup.io/repos/github/pytest-dev/pytest-messenger/
         :alt: Updates
-     
+
 
 
 Pytest to Slack reporting plugin
 
 
 * Free software: MIT license
-* Documentation: https://pytest-slack.readthedocs.io.
+* Documentation: https://pytest-messenger.readthedocs.io.
 
 
 Requirements
@@ -38,9 +40,9 @@ Requirements
 Installation
 ------------
 
-You can install "pytest-slack" via `pip`_::
+You can install "pytest-messenger" via `pip`_::
 
-    $ pip install pytest-slack
+    $ pip install pytest-messenger
 
 
 Usage
@@ -76,11 +78,11 @@ Example
 
 All kind of problems:
 
-.. image:: https://raw.githubusercontent.com/pytest-dev/pytest-slack/master/img/failed.png
+.. image:: https://raw.githubusercontent.com/pytest-dev/pytest-messenger/master/img/failed.png
 
 Passed test:
 
-.. image:: https://raw.githubusercontent.com/pytest-dev/pytest-slack/master/img/success.png
+.. image:: https://raw.githubusercontent.com/pytest-dev/pytest-messenger/master/img/success.png
 
 
 ----
@@ -89,7 +91,7 @@ $ pytest tests --slack_hook=https://hooks.slack.com/services/... --slack_channel
 
 Passed test with link:
 
-.. image:: https://raw.githubusercontent.com/pytest-dev/pytest-slack/master/img/success_link.png
+.. image:: https://raw.githubusercontent.com/pytest-dev/pytest-messenger/master/img/success_link.png
 
 
 
@@ -107,7 +109,7 @@ Credits
 [ ~ Dependencies scanned by PyUp.io ~ ]
 
 .. _`slack hook`: https://get.slack.help/hc/en-us/articles/115005265063-Incoming-WebHooks-for-Slack
-.. _`file an issue`: https://github.com/pytest-dev/pytest-slack/issues
+.. _`file an issue`: https://github.com/pytest-dev/pytest-messenger/issues
 .. _`pytest`: https://github.com/pytest-dev/pytest
 .. _`tox`: https://tox.readthedocs.io/en/latest/
 .. _`pip`: https://pypi.python.org/pypi/pip/

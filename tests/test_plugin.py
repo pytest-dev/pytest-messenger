@@ -4,8 +4,8 @@ import mock
 import pytest
 
 
-def test_pytest_slack_failed(testdir):
-    """Make sure that our pytest-slack works."""
+def test_pytest_messenger_slack_failed(testdir):
+    """Make sure that our pytest-messenger works."""
 
     testdir.makepyfile(
         """
@@ -66,8 +66,8 @@ def test_pytest_slack_failed(testdir):
         assert emoji == slack_hook_icon_emoji
 
 
-def test_pytest_slack_passed(testdir):
-    """Make sure that our pytest-slack works."""
+def test_pytest_messenger_slack_passed(testdir):
+    """Make sure that our pytest-messenger works."""
 
     testdir.makepyfile(
         """
@@ -111,7 +111,7 @@ def test_pytest_slack_passed(testdir):
     ("Test Prefix", None),
     ("Test Prefix", "http://report_link.com")
 ])
-def test_pytest_slack_message_prefix(testdir, expected_prefix, report_link):
+def test_pytest_messenger_slack_message_prefix(testdir, expected_prefix, report_link):
     """Make sure that message prefix works."""
 
     testdir.makepyfile(
@@ -150,7 +150,7 @@ def test_pytest_slack_message_prefix(testdir, expected_prefix, report_link):
     ('1 == 1', ':sunny:'),
     ('2 == 1', ':rain_cloud:'),
 ])
-def test_pytest_slack_custom_emojis(testdir, test_input, expected_emoji):
+def test_pytest_messenger_slack_custom_emojis(testdir, test_input, expected_emoji):
     testdir.makepyfile(
         """
         def test_icon_emoji():
@@ -178,7 +178,7 @@ def test_pytest_slack_custom_emojis(testdir, test_input, expected_emoji):
     ('1 == 1', 'http://localhost/success.png'),
     ('2 == 1', 'http://localhost/failed.png'),
 ])
-def test_pytest_slack_custom_icons(testdir, test_input, expected_url):
+def test_pytest_messenger_slack_custom_icons(testdir, test_input, expected_url):
     testdir.makepyfile(
         """
         def test_icon_url():
@@ -206,7 +206,7 @@ def test_pytest_slack_custom_icons(testdir, test_input, expected_url):
     ('1 == 1', 'http://localhost/success.png'),
     ('2 == 1', 'http://localhost/failed.png'),
 ])
-def test_pytest_slack_icon_overrides_emoji(testdir, test_input, expected_url):
+def test_pytest_messenger_slack_icon_overrides_emoji(testdir, test_input, expected_url):
     testdir.makepyfile(
         """
         def test_icon_url():

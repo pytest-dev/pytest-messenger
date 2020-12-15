@@ -4,7 +4,7 @@
 # You can set these variables from the command line.
 SPHINXOPTS    =
 SPHINXBUILD   = python -msphinx
-SPHINXPROJ    = pytest_slack
+SPHINXPROJ    = pytest_messenger
 SOURCEDIR     = .
 BUILDDIR      = _build
 

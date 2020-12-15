@@ -9,7 +9,7 @@ if "%SPHINXBUILD%" == "" (
 )
 set SOURCEDIR=.
 set BUILDDIR=_build
-set SPHINXPROJ=pytest_slack
+set SPHINXPROJ=pytest_messenger
 
 if "%1" == "" goto help
 
