@@ -23,11 +23,17 @@ ex pytest-slack
 
 
 
-Pytest to Slack reporting plugin
+
+Pytest to IM reporting plugin
+
+Supported messengers:
+
+* Slack
+* DingTalk - soon
+* Telegram - soon
 
 
-* Free software: MIT license
-* Documentation: https://pytest-messenger.readthedocs.io.
+
 
 
 Requirements
@@ -96,6 +102,8 @@ Passed test with link:
 
 
 
+* Free software: MIT license
+* Full documentation: https://pytest-messenger.readthedocs.io.
 
 Issues
 ------
