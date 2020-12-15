@@ -1,17 +1,17 @@
-dist: xenial   
+dist: xenial
 language: python
 python:
   - 3.8
   - 3.7
   - 2.7
 
-install: 
+install:
   - pip install -U tox-travis
   - pip install codecov
 
-script: 
+script:
   - tox
-  - coverage run --source ./pytest_slack -m py.test tests
+  - coverage run --source ./pytest_messenger -m py.test tests
   - coverage report -m
 
 after_success:
@@ -25,5 +25,5 @@ deploy:
     secure: EcsTJOF8jrSb8YbiZsu7gxtTcFyNeBBBEx1E98dmJPR/lEISddMwDxHYRdo9U+i5vHcfgymw8ZnqOCpFkgyyFksm8LT1rgrhV0bmVBVwU1WiAGH5bCPshP2XK8otfPeV6E7kqzs06DBDR1YdPKqswouVzJOg9LOrH8aqlfdbiVWZ6E+O8OUqZgLMO2xYsjlkI03Iu7ClxsMa8Q91IT8YzAvhLajxlWTx0RLyil360s6tsscdRAsFB5q2P734NoWFnhfWdiV2nIbufnM61kNm/FYEb6vWJuvqQ4+BcVkXlaweCQ3oN2PvxhM8oQhJN3IwXLB5Qq2mNlNFjDgLUyylQJEkWzTNr/84XrLZAwfuVgtshXqWzjmUJx+5SYXOhDZD/ThrUNR1e3SNW5ZJv2Fv96TCp5PKRxvZPxJo148BlQ/f6L08o9hzkG/RXU08PbLHsqNqWU1KP+LrKOzNtlMsfKpTcg/6Z2AzmURyk8rmj6tczNFToiuJJdoeNJdvY55H8tPfv5TSziizvAm0HrEqHiMoV+tRCdjJ8nQe3dCIHZmOz1bDV6ocB5yS7RG0G2MPYrh+5ERp5PxMmD4i6ckhQdGAL3M+vFSWSnH17rpGwAtTVqzSX2oJkwgVJiDLMPWRdEvDE7KPXcOSzE8go0ASPHLEgLhGUmV2DvSlDtpYHjs=
   on:
     tags: true
-    repo: pytest-dev/pytest-slack
+    repo: pytest-dev/pytest-messenger
     python: 3.7
