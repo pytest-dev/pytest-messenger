@@ -10,12 +10,12 @@ def pytest_addoption(parser):
 
 
 class TestResult:
-    failed: int
-    passed: int
-    skipped: int
-    error: int
-    xfailed: int
-    xpassed: int
+    failed = 0
+    passed = 0
+    skipped = 0
+    error = 0
+    xfailed = 0
+    xpassed = 0
 
 
 @pytest.hookimpl(hookwrapper=True)
