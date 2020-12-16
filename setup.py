@@ -48,7 +48,7 @@ setup(
     test_suite='tests',
     tests_require=test_requirements,
     url='https://github.com/pytest-dev/pytest-messenger',
-    version='3.0.0',
+    version='3.1.0',
     zip_safe=False,
     entry_points={
         'pytest11': [
