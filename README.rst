@@ -26,7 +26,7 @@ Supported messengers:
 * Telegram - soon
 
 
-
+.. image:: https://raw.githubusercontent.com/pytest-dev/pytest-messenger/master/img/demo.gif
 
 
 Requirements
