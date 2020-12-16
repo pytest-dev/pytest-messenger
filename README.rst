@@ -22,7 +22,7 @@ Pytest to IM reporting plugin
 Supported messengers:
 
 * `Slack <https://github.com/pytest-dev/pytest-messenger/wiki/Slack>`_
-* DingTalk - soon
+* `Ding Talk <https://github.com/pytest-dev/pytest-messenger/wiki/DingTalk>`_
 * Telegram - soon
 
 
