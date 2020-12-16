@@ -44,12 +44,6 @@ You can install "pytest-messenger" via `pip`_::
     $ pip install pytest-messenger
 
 
-Usage
------
-
-* `Slack <https://github.com/pytest-dev/pytest-messenger/wiki/Slack>`_
-
-
 
 
 
