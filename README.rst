@@ -33,6 +33,7 @@ Requirements
 ------------
 
 * Requests
+* Python >= 3.6
 
 
 
