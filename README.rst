@@ -19,14 +19,15 @@ ex pytest-slack
 
 Pytest to IM reporting plugin
 
-Supported messengers:
+Supported messengers and links to the usage:
 
 * `Slack <https://github.com/pytest-dev/pytest-messenger/wiki/Slack>`_
 * `Ding Talk <https://github.com/pytest-dev/pytest-messenger/wiki/DingTalk>`_
 * Telegram - soon
 
 
-.. image:: https://raw.githubusercontent.com/pytest-dev/pytest-messenger/master/img/demo.gif
+.. image:: https://raw.githubusercontent.com/pytest-dev/pytest-messenger/master/img/demo.gif 
+     :align: center
 
 
 Requirements
