@@ -1,6 +1,6 @@
 import json
-import mock
 
+import mock
 import pytest
 
 
@@ -234,3 +234,79 @@ def test_pytest_messenger_slack_icon_overrides_emoji(testdir, test_input, expect
 
         assert url == expected_url
         assert emoji is None
+
+
+def test_only_failed(testdir):
+    """Make sure that our pytest-messenger works."""
+
+    testdir.makepyfile(
+        """
+        import pytest
+        def test_pass():
+            assert 1 == 1
+
+
+        def test_fail():
+            assert 1 == 2
+
+        def test_error(test):
+            assert 1 == ""
+        """
+    )
+
+    slack_hook_host = 'http://test.com/any_hash'
+    slack_hook_username = 'regression Testing'
+    slack_hook_report_host = 'http://report_link.com'
+    slack_hook_channel = 'test'
+    slack_hook_icon_emoji = ':thumbsdown:'
+    expected_text = '<http://report_link.com|Failed=1 Error=1>'
+    with mock.patch('requests.post') as mock_post:
+        testdir.runpytest('--slack_channel', slack_hook_channel,
+                          '--slack_hook', slack_hook_host,
+                          '--slack_report_link', slack_hook_report_host,
+                          '--slack_username', slack_hook_username,
+                          '--slack_failed_emoji', slack_hook_icon_emoji,
+                          '--only_failed', True)
+
+        called_data = json.loads(mock_post.call_args[1]['data'])
+        called_host = mock_post.call_args[0][0]
+        called_channel = called_data['channel']
+        called_username = called_data['username']
+        text = called_data['attachments'][0]['text']
+        color = called_data['attachments'][0]['color']
+        emoji = called_data['icon_emoji']
+
+        assert called_host == slack_hook_host
+        assert text == expected_text
+        assert called_channel == slack_hook_channel
+        assert called_username == slack_hook_username
+        assert color == '#ff0000'
+        assert emoji == slack_hook_icon_emoji
+
+
+def test_only_failed_no_fails(testdir):
+    """Make sure that our pytest-messenger works."""
+
+    testdir.makepyfile(
+        """
+        import pytest
+        def test_pass():
+            assert 1 == 1
+
+        """
+    )
+
+    slack_hook_host = 'http://test.com/any_hash'
+    slack_hook_username = 'regression Testing'
+    slack_hook_report_host = 'http://report_link.com'
+    slack_hook_channel = 'test'
+    slack_hook_icon_emoji = ':thumbsdown:'
+
+    with mock.patch('requests.post') as mock_post:
+        testdir.runpytest('--slack_channel', slack_hook_channel,
+                          '--slack_hook', slack_hook_host,
+                          '--slack_report_link', slack_hook_report_host,
+                          '--slack_username', slack_hook_username,
+                          '--slack_failed_emoji', slack_hook_icon_emoji,
+                          '--only_failed', True)
+        assert mock_post.call_args is None

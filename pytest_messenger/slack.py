@@ -1,5 +1,6 @@
-import requests
 import json
+
+import requests
 
 
 def add_slack_options(parser):
@@ -90,10 +91,19 @@ def add_slack_options(parser):
         help='Set icon (a url) for a failed run. Overrides slack_failed_icon'
     )
 
+    group.addoption(
+        '--only_failed',
+        action='store',
+        dest='only_failed',
+        default=False,
+        help='Send only failed results to the messenger'
+    )
+
 
 def slack_send_message(test_result, config, exitstatus):
     timeout = config.option.slack_timeout
     report_link = config.option.slack_report_link
+    only_failed = config.option.only_failed
     slack_hook = config.option.slack_hook
     channel = config.option.slack_channel
     ssl_verify = config.option.ssl_verify
@@ -107,13 +117,22 @@ def slack_send_message(test_result, config, exitstatus):
         color = '#ff0000'
         emoji = config.option.slack_failed_emoji
         icon = config.option.slack_failed_icon
-    final_results = 'Passed=%s Failed=%s Skipped=%s Error=%s XFailed=%s XPassed=%s' % (
-        test_result.passed,
-        test_result.failed,
-        test_result.skipped,
-        test_result.error,
-        test_result.xfailed,
-        test_result.xpassed)
+    if only_failed:
+        if test_result.failed == 0 and test_result.error == 0:
+            return  # Do not send anything when all passed and no errors.
+        final_results = 'Failed=%s Error=%s' % (
+            test_result.failed,
+            test_result.error,
+        )
+
+    else:
+        final_results = 'Passed=%s Failed=%s Skipped=%s Error=%s XFailed=%s XPassed=%s' % (
+            test_result.passed,
+            test_result.failed,
+            test_result.skipped,
+            test_result.error,
+            test_result.xfailed,
+            test_result.xpassed)
     if report_link:
         final_results = '<%s|%s>' % (report_link, final_results)
     if message_prefix:
