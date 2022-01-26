@@ -18,7 +18,7 @@ requirements = ['requests']
 
 setup_requirements = ['pytest-runner', ]
 
-test_requirements = ['pytest', ]
+test_requirements = ['pytest', 'pytest-xdist']
 
 setup(
     author="LaserPhaser",
@@ -29,7 +29,6 @@ setup(
         'Intended Audience :: Developers',
         'License :: OSI Approved :: MIT License',
         'Natural Language :: English',
-        'Programming Language :: Python :: 2.7',
         'Programming Language :: Python :: 3.6',
         'Programming Language :: Python :: 3.7',
         'Programming Language :: Python :: 3.8',
@@ -50,6 +49,7 @@ setup(
     url='https://github.com/pytest-dev/pytest-messenger',
     version='3.1.0',
     zip_safe=False,
+    python_requires='>=3.6',
     entry_points={
         'pytest11': [
             'pytest-messenger = pytest_messenger.plugin',
