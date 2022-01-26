@@ -310,3 +310,65 @@ def test_only_failed_no_fails(testdir):
                           '--slack_failed_emoji', slack_hook_icon_emoji,
                           '--only_failed', True)
         assert mock_post.call_args is None
+
+
+def test_xdist_count(testdir):
+    """Make sure that our pytest-messenger works."""
+
+    testdir.makepyfile(
+        """
+        import pytest
+        def test_pass_1():
+            assert 1 == 1
+
+        def test_pass_2():
+            assert 1 == 1
+
+        def test_pass_3():
+            assert 1 == 1
+
+        def test_pass_4():
+            assert 1 == 1
+
+        def test_pass_5():
+            assert 1 == 1
+
+        def test_pass_6():
+            assert 1 == 1
+
+        def test_pass_7():
+            assert 1 == 1
+
+        def test_fail_8():
+            assert 1 == 0
+        """
+    )
+
+    slack_hook_host = 'http://test.com/any_hash'
+    slack_hook_username = 'regression Testing'
+    slack_hook_report_host = 'http://report_link.com'
+    slack_hook_channel = 'test'
+    slack_hook_icon_emoji = ':thumbsdown:'
+    expected_text = '<http://report_link.com|Passed=7 Failed=1 Skipped=0 Error=0 XFailed=0 XPassed=0>'
+    with mock.patch('requests.post') as mock_post:
+        testdir.runpytest('-n', '2',
+                          '--slack_channel', slack_hook_channel,
+                          '--slack_hook', slack_hook_host,
+                          '--slack_report_link', slack_hook_report_host,
+                          '--slack_username', slack_hook_username,
+                          '--slack_failed_emoji', slack_hook_icon_emoji)
+
+        called_data = json.loads(mock_post.call_args[1]['data'])
+        called_host = mock_post.call_args[0][0]
+        called_channel = called_data['channel']
+        called_username = called_data['username']
+        text = called_data['attachments'][0]['text']
+        color = called_data['attachments'][0]['color']
+        emoji = called_data['icon_emoji']
+
+        assert called_host == slack_hook_host
+        assert text == expected_text
+        assert called_channel == slack_hook_channel
+        assert called_username == slack_hook_username
+        assert color == '#ff0000'
+        assert emoji == slack_hook_icon_emoji
