@@ -26,6 +26,13 @@ def add_slack_options(parser):
         default=None,
         help='Used for reporting to slack'
     )
+    group.addoption(
+        '--slack_test_name',
+        action='store',
+        dest='slack_test_name',
+        default=None,
+        help='Used for adding test name to the final report'
+    )
 
     group.addoption(
         '--slack_report_link',
@@ -104,6 +111,7 @@ def slack_send_message(test_result, config, exitstatus):
     timeout = config.option.slack_timeout
     report_link = config.option.slack_report_link
     only_failed = config.option.only_failed
+    slack_test_name = config.option.slack_test_name
     slack_hook = config.option.slack_hook
     channel = config.option.slack_channel
     ssl_verify = config.option.ssl_verify
@@ -133,10 +141,13 @@ def slack_send_message(test_result, config, exitstatus):
             test_result.error,
             test_result.xfailed,
             test_result.xpassed)
+    if slack_test_name:
+        final_results = 'Test=%s ' % (slack_test_name) + final_results
     if report_link:
         final_results = '<%s|%s>' % (report_link, final_results)
     if message_prefix:
         final_results = '%s: %s' % (message_prefix, final_results)
+    
     results_pattern = {
         "color": color,
         "text": final_results,
