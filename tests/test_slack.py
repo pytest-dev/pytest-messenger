@@ -106,7 +106,6 @@ def test_pytest_messenger_slack_passed(testdir):
         assert color == '#56a64f'
         assert emoji == slack_hook_icon_emoji
 
-
 @pytest.mark.parametrize('expected_prefix,report_link', [
     ("Test Prefix", None),
     ("Test Prefix", "http://report_link.com")
@@ -136,6 +135,43 @@ def test_pytest_messenger_slack_message_prefix(testdir, expected_prefix, report_
     if report_link:
         expected_text = '<%s|%s>' % (report_link, expected_text)
     expected_text = '%s: %s' % (expected_prefix, expected_text)
+
+    with mock.patch('requests.post') as mock_post:
+        testdir.runpytest(*run_args)
+
+        called_data = json.loads(mock_post.call_args[1]['data'])
+        text = called_data['attachments'][0]['text']
+
+        assert text == expected_text
+
+@pytest.mark.parametrize('expected_test_name,report_link', [
+    ("test_name", None),
+    ("test_name", "http://report_link.com")
+])
+def test_pytest_messenger_slack_message_test_name(testdir, expected_test_name, report_link):
+    """Make sure that message test_name works."""
+
+    testdir.makepyfile(
+        """
+        import pytest
+        def test_pass():
+            assert 1 == 1
+        """
+    )
+
+    slack_hook_host = 'http://test.com/any_hash'
+    slack_hook_channel = 'test'
+    run_args = [
+        '--slack_channel', slack_hook_channel,
+        '--slack_hook', slack_hook_host,
+        '--slack_test_name', expected_test_name
+    ]
+    if report_link:
+        run_args.extend(['--slack_report_link', report_link])
+
+    expected_text = 'Test=test_name Passed=1 Failed=0 Skipped=0 Error=0 XFailed=0 XPassed=0'
+    if report_link:
+        expected_text = '<%s|%s>' % (report_link, expected_text)
 
     with mock.patch('requests.post') as mock_post:
         testdir.runpytest(*run_args)
