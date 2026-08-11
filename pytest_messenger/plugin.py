@@ -2,11 +2,13 @@ import pytest
 
 from .slack import slack_send_message, add_slack_options
 from .dingtalk import ding_send_message, add_ding_options
+from .discord import discord_send_message, add_discord_options
 
 
 def pytest_addoption(parser):
     add_slack_options(parser)
     add_ding_options(parser)
+    add_discord_options(parser)
 
 
 class TestResult:
@@ -35,3 +37,5 @@ def pytest_terminal_summary(terminalreporter, exitstatus, config):
         slack_send_message(test_result, config, exitstatus)
     if config.option.ding_secret and config.option.ding_access_token:
         ding_send_message(test_result, config, exitstatus)
+    if config.option.discord_webhook:
+        discord_send_message(test_result, config, exitstatus)
